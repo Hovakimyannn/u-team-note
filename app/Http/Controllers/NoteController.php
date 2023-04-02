@@ -27,16 +27,22 @@ class NoteController extends Controller
      * Display a listing of the resource.
      *
      * @param \Illuminate\Http\Request $request
+     * @param                          $id
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function index(Request $request): JsonResponse
+    public function index(Request $request, int $id = null): JsonResponse
     {
         $from = $request->from ?? 0;
         $offset = $request->offset ?? 10;
 
         $notes = $this->noteRepository->paginateBy(
-            [],
+            [
+                [
+                    'tag_id',
+                    $id
+                ]
+            ],
             $from,
             $offset
         );

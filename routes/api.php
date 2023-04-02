@@ -14,17 +14,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sso')->controller(NoteController::class)
+Route::middleware(['auth:sso'/*,'can:is_owner'*/])->controller(NoteController::class)
     ->prefix('/notes')
     ->group(function () {
-        Route::GET('/', 'index');//->middleware('can:index_note');
-        Route::POST('/', 'store');//->middleware('can:store_note');
-        Route::POST('/{id}', 'update');//->middleware('can:update_note');
-        Route::GET('/{id}', 'show');//->middleware('can:show_note');
-        Route::DELETE('/{id}', 'destroy');//->middleware('can:destroy_note');
+        Route::GET('/tag/{id?}', 'index');
+        Route::POST('/', 'store');
+        Route::POST('/{id}', 'update');
+        Route::GET('/{id}', 'show');
+        Route::DELETE('/{id}', 'destroy');
     });
 
 Route::middleware('auth:sso')->get('/user', function () {
     return new \Illuminate\Http\JsonResponse(\Illuminate\Support\Facades\Auth::user());
 });
-
