@@ -27,7 +27,7 @@ class NoteController extends Controller
      * Display a listing of the resource.
      *
      * @param \Illuminate\Http\Request $request
-     * @param                          $id
+     * @param int|null                 $id
      *
      * @return \Illuminate\Http\JsonResponse
      */
