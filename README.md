@@ -71,12 +71,6 @@ You can now access the server at http://localhost:8000
 
 ## NOTE
 
-### Paginate notes. To sort the records in descending order of created_at
-
-```http
-  GET /api/notes?from=0&offset=5
-```
-
 ### Create a new note
 
 ```http
