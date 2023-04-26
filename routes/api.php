@@ -18,6 +18,7 @@ Route::middleware(['auth:sso'/*,'can:is_owner'*/])->controller(NoteController::c
     ->prefix('/notes')
     ->group(function () {
         Route::GET('/tag/{id?}', 'index');
+        Route::GET('/tags', 'tags');
         Route::POST('/', 'store');
         Route::POST('/{id}', 'update');
         Route::GET('/{id}', 'show');

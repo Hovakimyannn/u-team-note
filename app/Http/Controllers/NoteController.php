@@ -64,6 +64,14 @@ class NoteController extends Controller
     }
 
     /**
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function tags(): JsonResponse
+    {
+        return new JsonResponse(Tag::all());
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param int $id
@@ -93,6 +101,7 @@ class NoteController extends Controller
         ]);
 
         if ($file = $request->file('media')) {
+            Storage::path('.');
             $image = $this->imageAdapter->make($file);
             $this->imageAdapter->resize($image, $image->width(), $image->height());
             $filename = hash('sha256', $image->filename).'.'.$file->extension();
