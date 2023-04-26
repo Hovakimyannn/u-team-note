@@ -41,6 +41,14 @@ class NoteController extends Controller
                 [
                     'tag_id',
                     $id
+                ],
+                [
+                    'user_id',
+                    $request->user()->getId()
+                ],
+                [
+                    'user_role',
+                    $request->user()->getRole()
                 ]
             ],
             $from,
