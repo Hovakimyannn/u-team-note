@@ -9,6 +9,7 @@ use App\Repositories\NoteRepository;
 use App\Services\ImageAdapter\ImageAdapter;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class NoteController extends Controller
@@ -76,7 +77,11 @@ class NoteController extends Controller
      */
     public function tags(): JsonResponse
     {
-        return new JsonResponse(Tag::all());
+        $userId = Auth::user()->getId();
+        $userRole = Auth::user()->getRole();
+        $tagIds = $this->noteRepository->findManyBy([['user_id',$userId],['user_role',$userRole]])->pluck('tag_id');
+
+        return new JsonResponse(Tag::whereIn('id', $tagIds)->get());
     }
 
     /**
