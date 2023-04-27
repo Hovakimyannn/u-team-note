@@ -13,13 +13,13 @@ class NoteRepository extends BaseRepository
     }
 
     /**
-     * @param \App\Models\Tag $tag
+     * @param \App\Models\Tag|null $tag
      *
      * @return void
      */
-    public function logicWhenTagShouldRemoved(Tag $tag) : void
+    public function logicWhenTagShouldRemoved(?Tag $tag) : void
     {
-        if ($tag->notes->isEmpty()){
+        if ($tag && $tag->notes->isEmpty()){
             $tag->delete();
         }
     }
